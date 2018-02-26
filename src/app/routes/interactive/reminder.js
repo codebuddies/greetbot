@@ -1,3 +1,13 @@
+const qs = require('querystring');
+const axios = require('axios');
+const JsonDB = require('node-json-db');
+
+const db = new JsonDB('users', true, false);
+
+const postResult = result => console.log(result.data);
+const message = require('../slash/welcomeData');
+
+
 // find all the users who've been presented the ToS and send them a reminder to accept.
 // the same logic can be applied to find users that need to be removed from the team
 const remind = () => {

@@ -2,9 +2,9 @@ require('dotenv').config();
 
 const app = require('express')();
 const bodyParser = require('body-parser');
-const initalEvent = require('./app/routes/events/inital');
+const initalEvent = require('./app/routes/events/initial');
 const slashWelcome = require('./app/routes/slash/welcome');
-const initalResponse = require('./app/routes/interactive/inital');
+const initalResponse = require('./app/routes/interactive/initial');
 
 
 //const app = express();
