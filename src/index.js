@@ -4,7 +4,7 @@ const app = require('express')();
 const bodyParser = require('body-parser');
 const initalEvent = require('./app/routes/events/initial');
 const slashWelcome = require('./app/routes/slash/welcome');
-const initalResponse = require('./app/routes/interactive/initial');
+const initalResponse = require('./app/routes/interactive/initialRefactor');
 
 
 //const app = express();
@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
  *   - url_verification: Returns challenge token sent when present.
  *   - event_callback: Confirm verification token & handle `team_join` event.
  */
-app.post('/events', (req, res) => { initalEvent.eventWelcome() });
+app.post('/events', (req, res) => { initalEvent.eventWelcome(req, res) });
 
 /*
  * Endpoints to receive various slash commands from Slack's API.
@@ -36,7 +36,7 @@ app.post('/events', (req, res) => { initalEvent.eventWelcome() });
  *   -Each function attempts to confirm a verification token & then executes various commmand scenarios.
  *   -Command extentions for each slash command can be added via case statements in the various command files.
  */
-app.post('/welcome', (req, res) => { slashWelcome.welcome() });
+app.post('/welcome', (req, res) => { slashWelcome.welcome(req, res) });
 
 //app.post('/resources'), (req, res) => {'slashResources'});
 
@@ -44,7 +44,7 @@ app.post('/welcome', (req, res) => { slashWelcome.welcome() });
  * Endpoint to receive events from interactive welcome message on Slack. Checks the
  * verification token before continuing.
  */
-app.post('/interactive-message', (req, res) => { initalResponse.welcomeResponse() });
+app.post('/interactive-message', (req, res) => { initalResponse.welcomeResponse(req, res) });
 
 
 app.listen(process.env.PORT, () => {
