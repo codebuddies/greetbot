@@ -6,7 +6,7 @@
 4. Pull that branch to Glitch.com for viewing with our Test Slack team.
 5. As an alternative, use **NGROK (https://ngrok.com/)** with your own Slack Team for development. (see the directions below, in addition to https://api.slack.com/slack-apps for how to set up and install a custom slack app for your team account).
 5. Make your changes & then save/push those changes back to Github on your branch.
-6. Open a pull request to merge your proposed changes back into **development**.  Please note any feature or bug numbers addressed & any other important notes in your pull request comments.
+6. Open a pull request to merge your proposed changes back into **devlopment**.  Please note any feature or bug numbers addressed & any other important notes in your pull request comments.
 
 **Note: do not make changes or make PRs to the `master` branch.**
 
