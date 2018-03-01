@@ -8,18 +8,18 @@ const help = messages.help;
 const parsePayload = (payload) => {
   const textPayload = payload.trim();
   // case 1: <#channel id|channel name> or <@user id|username>
-  const idxUsername = textPayload.lastIndexOf('@');
-  const idxChannelName = textPayload.lastIndexOf('#');
+  const idxUsername = textPayload.lastIndexOf('<@');
+  const idxChannelName = textPayload.lastIndexOf('<#');
   const idxSeparator = textPayload.lastIndexOf('|'); 
 
-  const target_user = idxUsername >= 0 ? textPayload.substring(idxUsername+1, idxSeparator) : undefined;
-  const channel_name = idxChannelName >= 0 ? textPayload.substring(idxChannelName, idxSeparator) : undefined;
+  const target_user = idxUsername >= 0 ? textPayload.substring(idxUsername+2, idxSeparator) : undefined;
+  const channel_name = idxChannelName >= 0 ? textPayload.substring(idxChannelName+2, idxSeparator) : undefined;
 
   let actionRequest = textPayload;
   if (target_user) {
-    actionRequest = textPayload.substring(0, idxUsername).trim();
+    actionRequest = textPayload.substring(0, idxUsername - 1).trim();
   } else if (channel_name) {
-    actionRequest =textPayload.substring(0, idxChannelName).trim();
+    actionRequest =textPayload.substring(0, idxChannelName - 1).trim();
   }
   return { target_user, channel_name, actionRequest };
 }
