@@ -37,4 +37,4 @@ const help = {
        }]),
    };
 
-module.exports = { help };, help
+module.exports = { message, help };

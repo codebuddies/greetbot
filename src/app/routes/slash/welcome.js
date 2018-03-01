@@ -7,11 +7,13 @@ const help = messages.help;
 
 const parsePayload = (payload) => {
   const textPayload = payload.trim();
-  const idxUsername = textPayload.lastIndexOf("@");
-  const idxChannelName = textPayload.lastIndexOf("#");
+  // case 1: <#channel id|channel name> or <@user id|username>
+  const idxUsername = textPayload.lastIndexOf('@');
+  const idxChannelName = textPayload.lastIndexOf('#');
+  const idxSeparator = textPayload.lastIndexOf('|'); 
 
-  const target_user = idxUsername >= 0 ? textPayload.substring(idxUsername+1) : undefined;
-  const channel_name = idxChannelName >= 0 ? textPayload.substring(idxChannelName) : undefined;
+  const target_user = idxUsername >= 0 ? textPayload.substring(idxUsername+1, idxSeparator) : undefined;
+  const channel_name = idxChannelName >= 0 ? textPayload.substring(idxChannelName, idxSeparator) : undefined;
 
   let actionRequest = textPayload;
   if (target_user) {
