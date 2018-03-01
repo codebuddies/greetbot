@@ -3,6 +3,7 @@ node_modules
 .env
 *.log
 users.json
+package-lock.json
 .nvmrc
 .env.sample
 slush/*

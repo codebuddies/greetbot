@@ -18,7 +18,7 @@ const eventWelcome = (req, res) => {
 
         // `team_join` is fired whenever a new user (incl. a bot) joins the team
         // check if `event.is_restricted == true` to limit to guest accounts
-        if (event.type === 'team_join' || !event.is_bot) {
+        if (event.type === 'team_join' && !event.user.is_bot) {
           const { team_id, id } = event.user;
           initialMessage(team_id, id);
         }
