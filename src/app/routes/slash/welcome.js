@@ -19,7 +19,7 @@ const parsePayload = (payload) => {
   if (target_user) {
     actionRequest = textPayload.substring(0, idxUsername - 1).trim();
   } else if (channel_name) {
-    actionRequest =textPayload.substring(0, idxChannelName - 1).trim();
+    actionRequest = textPayload.substring(0, idxChannelName - 1).trim();
   }
   return { target_user, channel_name, actionRequest };
 }
