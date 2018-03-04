@@ -5,6 +5,7 @@ const app = require('express')();
 const bodyParser = require('body-parser');
 const initalEvent = require('routes/endpoints/events/initial');
 const slashWelcome = require('routes/endpoints/slash/welcome/welcome');
+const slashResources = require('routes/endpoints/slash/resources/resources');
 const initalResponse = require('routes/data/interactive/initialResponse');
 
 //const app = express();
@@ -38,7 +39,7 @@ app.post('/events', (req, res) => { initalEvent.eventWelcome(req, res) });
  */
 app.post('/welcome', (req, res) => { slashWelcome.welcome(req, res) });
 
-//app.post('/resources'), (req, res) => {'slashResources'});
+app.post('/resources', (req, res) => { slashResources.resources(req, res) });
 
 /*
  * Endpoint to receive events from interactive welcome message on Slack. Checks the
