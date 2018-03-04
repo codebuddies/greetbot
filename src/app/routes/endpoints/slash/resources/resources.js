@@ -10,7 +10,7 @@ const resources = async (req, res) => {
 
   const parsedCommand = await incomingParser.parsePayload(req);
 
-  console.log(parsedCommand);
+  console.log(`parsedCommand is ${parsedCommand}`);
 
   if (req.body.token === process.env.SLACK_VERIFICATION_TOKEN) {
     switch (parsedCommand.action) {
@@ -20,7 +20,7 @@ const resources = async (req, res) => {
         break;
       case 'post':
         let sendToUser = true;
-        parsedCommand[target_channel_id].forEach(channel_id => {
+        parsedCommand.target_channel_id.forEach(channel_id => {
           if (parsedCommand.target_user_id === channel_id) {
             sendToUser = false;
           }
