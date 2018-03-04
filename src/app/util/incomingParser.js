@@ -47,8 +47,8 @@ const parsePayload = async (req) => {
   let channelMatch;
   channelMatch = channelIdRegexp.exec(textPayload);
   while (channelMatch != null) {
-    console.log(channelMatch(1));
-    target_channel_id_array.push(userMatch(1));
+    console.log(channelMatch[1]);
+    target_channel_id_array.push(channelMatch[1]);
     channelMatch = channelIdRegexp.exec(textPayload);
   }
 
