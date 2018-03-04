@@ -11,3 +11,5 @@ const resources = async (req, res) => {
 
   console.log(parsedCommand);
 }
+
+module.exports { resources };
