@@ -13,12 +13,12 @@ const resources = async (req, res) => {
   console.log(parsedCommand);
 
   if (req.body.token === process.env.SLACK_VERIFICATION_TOKEN) {
-    switch (recipients.action) {
+    switch (parsedCommand.action) {
       case 'list':
         console.log("this is the list action");
         break;
       default:
-        helpMessage(helpData, recipients.target_channel_id);
+        helpMessage(helpData, parsedCommand.target_channel_id);
         res.sendStatus(200);
     }
   } else {
