@@ -56,7 +56,7 @@ const parsePayload = async (req) => {
 
   //The command word (if any) typed.
   //If there's no legitimate command (or if it's blank), sent Msg should default to "help".
-  const action_request = target_user_id || target_channel_id ? textPayload.substring(textPayload.indexOf(''),textPayload.indexOf("<")-1) : req.body.text;
+  const action_request = target_user_id || target_channel_id_array.length ? textPayload.substring(textPayload.indexOf(''),textPayload.indexOf("<")-1) : req.body.text;
 
   //user_id of the user who typed the slash command
   //If no other info is specified, the Msg should go back to this user on the DM channel_id.
@@ -69,7 +69,7 @@ const parsePayload = async (req) => {
 
   // const parsedList = { team_id, target_user_id, target_channel_id, action_request, default_user_id, default_channel_id }
 
-  return { target_user_id: target_user_id, target_channel_id, target_channel_id_array, action: action_request, payload: textPayload }
+  return { target_user_id: target_user_id, target_channel_id: target_channel_id_array, action: action_request, payload: textPayload }
 
     // //If there isIn  a target user and channel, send both.
     // // channel=yes AND DM=yes....so two seperate messages.
