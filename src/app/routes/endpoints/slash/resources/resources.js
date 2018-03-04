@@ -17,6 +17,13 @@ const resources = async (req, res) => {
       case 'list':
         console.log("this is the list action");
         break;
+      case 'post':
+        if (parsedCommand.target_user_id != parsedCommand.target_channel_id) {
+          helpMessage(helpData, parsedCommand.target_user_id);
+        }
+        helpMessage(helpData, parsedCommand.target_channel_id);
+        res.sendStatus(200);
+        break;
       default:
         helpMessage(helpData, parsedCommand.target_channel_id);
         res.sendStatus(200);
