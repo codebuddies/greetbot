@@ -5,6 +5,7 @@ const postResult = result => console.log(result.data);
 const resourcesData = require('util/ymlLoader.js').resourcesData;
 
 const helpData = require('routes/data/slash/resources/resourcesHelp.js').help;
+const resourcesTemplateMessage = require('routes/data/slash/resources/resourcesMessage.js').message;
 const incomingParser = require('util/incomingParser.js');
 
 const resources = async (req, res) => {
@@ -18,11 +19,18 @@ const resources = async (req, res) => {
     switch (parsedCommand.action) {
       case 'list': {
         if (!parsedCommand.action_arguments.length) {
-          console.log(```Here is a list of resource names: \n${resourcesData.resources.forEach(resource => {
-            console.log(`${resource.name}\n`);
-          })}```)
+          console.log(```Here are the current topics we have:\n${resourcesData.resources.forEach(resource => {
+            console.log(`${resource.name}`);
+          })}```);
+        } else {
+          filteredResources = resourcesData.resources.filter(resource => {
+            return parsedCommand.action_arguments.includes(resource.language) ||
+                    parsedCommand.action_arguments.includes(resource.level);
+          })
+          console.log(```You asked for ${parsedCommand.action_arguments.join(" ")} links.\n\nHere are the filtered topics we have:\n${filteredResources.forEach(resource => {
+            console.log(`${resource.name}`);
+          })}```);
         }
-        console.log(`listing resources: ${resourcesData}`);
         res.sendStatus(200);
         break;
       }
