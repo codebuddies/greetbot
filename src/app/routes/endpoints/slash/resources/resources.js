@@ -2,6 +2,9 @@ const axios = require('axios');
 const qs = require('querystring');
 const postResult = result => console.log(result.data);
 
+const YAML = require('yamljs');
+const resourcesData = YAML.load('routes/data/slash/resources/resourcesData.yml');
+
 const helpData = require('routes/data/slash/resources/resourcesHelp.js').help;
 const incomingParser = require('util/incomingParser.js');
 
@@ -16,6 +19,7 @@ const resources = async (req, res) => {
     switch (parsedCommand.action) {
       case 'list': {
         console.log("this is the list action");
+        console.log(`listing resources: ${resourcesData}`);
         res.sendStatus(200);
         break;
       }

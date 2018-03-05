@@ -35,7 +35,22 @@ const parsePayload = async (req) => {
 
   //The command word (if any) typed.
   //If there's no legitimate command (or if it's blank), sent Msg should default to "help".
-  const action_request = target_user_id_array.length || target_channel_id_array.length ? textPayload.substring(textPayload.indexOf(''),textPayload.indexOf("<")-1) : req.body.text;
+  // Removes any usernames or channels, and extracts keywords from the rest
+  // const action_request = target_user_id_array.length || target_channel_id_array.length ? textPayload.substring(textPayload.indexOf(''),textPayload.indexOf("<")-1) : req.body.text;
+  const remaining_text = textPayload.replace(/<.*?>/g, '').replace(/ +/g, ' ').split(" ");
+  let action_keywords = [];
+  let action_arguments = [];
+  remaining_text.forEach(word => {
+    if (['test', 'list', 'post'].includes(word)) {
+      action_keywords.push(word);
+    } else {
+      action_arguments.push(word);
+    }
+  });
+
+  if (action_keywords.length > 1) {
+    action_keywords = [];
+  }
 
   //user_id of the user who typed the slash command
   //If no other info is specified, the Msg should go back to this user on the DM channel_id.
@@ -50,24 +65,24 @@ const parsePayload = async (req) => {
   // If both channel(s) and user(s) have been specified,
   // return both arrays as is
   if (target_channel_id_array.length && target_user_id_array.length) {
-    return { target_user_id: target_user_id_array, target_channel_id: target_channel_id_array, action: action_request, payload: textPayload }
+    return { target_user_id: target_user_id_array, target_channel_id: target_channel_id_array, action: action_keywords[0], action_arguments: action_arguments, payload: textPayload }
   }
   // If only user(s) have been specified,
   // set the target channel array to the user ids
   else if (!target_channel_id_array.length && target_user_id_array.length) {
-    return { target_user_id: target_user_id_array, target_channel_id: target_user_id_array, action: action_request, payload: textPayload }
+    return { target_user_id: target_user_id_array, target_channel_id: target_user_id_array, action: action_keywords[0], action_arguments: action_arguments, payload: textPayload }
   }
   // If only channel(s) have been specified,
   // no action is necessary on the arrays
   else if (target_channel_id_array.length && !target_user_id_array.length) {
-    return { target_user_id: target_user_id_array, target_channel_id: target_channel_id_array, action: action_request, payload: textPayload }
+    return { target_user_id: target_user_id_array, target_channel_id: target_channel_id_array, action: action_keywords[0], action_arguments: action_arguments, payload: textPayload }
   }
   // Finally, if no channels or users,
   // add the requested user's id as target channel,
   // to receive the message as a DM
   else {
     target_user_id_array.push(default_user_id);
-    return { target_user_id: target_user_id_array, target_channel_id: target_user_id_array, action: action_request, payload: textPayload }
+    return { target_user_id: target_user_id_array, target_channel_id: target_user_id_array, action: action_keywords[0], action_arguments: action_arguments, payload: textPayload }
   }
 
 };
