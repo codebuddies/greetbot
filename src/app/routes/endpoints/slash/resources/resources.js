@@ -14,11 +14,12 @@ const resources = async (req, res) => {
 
   if (req.body.token === process.env.SLACK_VERIFICATION_TOKEN) {
     switch (parsedCommand.action) {
-      case 'list':
+      case 'list': {
         console.log("this is the list action");
         res.sendStatus(200);
         break;
-      case 'post':
+      }
+      case 'post': {
         const common = parsedCommand.target_channel_id.filter(common_id => parsedCommand.target_user_id.includes(common_id));
         parsedCommand.target_channel_id.forEach(channel_id => {
           if (!common.includes(channel_id)) {
@@ -35,9 +36,11 @@ const resources = async (req, res) => {
         })
         res.sendStatus(200);
         break;
-      default:
+      }
+      default: {
         helpMessage(helpData, parsedCommand.target_channel_id[0]);
         res.sendStatus(200);
+      }
     }
   } else {
     res.sendStatus(503);

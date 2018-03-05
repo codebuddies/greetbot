@@ -19,40 +19,77 @@ const welcome = async (req, res) => {
   console.log(`CHANNEL NAME :: ${recipients.target_channel_id}`);
 
   if (req.body.token === process.env.SLACK_VERIFICATION_TOKEN) {
-     switch (recipients.action) {
-       case 'test':
-        if (recipients.target_user_id != recipients.target_channel_id){
-          welcomeMessage(welcomeData, recipients.target_user_id);
-          welcomeMessage(welcomeData, recipients.target_channel_id);
-          res.sendStatus(200);
-          break;
-        } else {
-         welcomeMessage(welcomeData, recipients.target_channel_id);
-         res.sendStatus(200);
-         break;
-       }
-       case 'post':
-         if (recipients.target_user_id != recipients.target_channel_id){
-           welcomeMessage(welcomeData, recipients.target_user_id);
-           welcomeMessage(welcomeData, recipients.target_channel_id);
-           res.sendStatus(200);
-           break;
-         } else {
-          welcomeMessage(welcomeData, recipients.target_channel_id);
-          res.sendStatus(200);
-          break;
-        }
-        default:
-          if (recipients.target_user_id != recipients.target_channel_id){
-          helpMessage(helpData, recipients.target_user_id);
-          helpMessage(helpData, recipients.target_channel_id);
-          res.sendStatus(200);
-          break;
-        } else {
-         helpMessage(helpData, recipients.target_channel_id);
-         res.sendStatus(200);
-        }
+    switch (recipients.action) {
+      case 'test': {
+        const common = recipients.target_channel_id.filter(common_id => recipients.target_user_id.includes(common_id));
+        recipients.target_channel_id.forEach(channel_id => {
+          if (!common.includes(channel_id)) {
+            welcomeMessage(welcomeData, channel_id);
+          }
+        });
+        recipients.target_user_id.forEach(user_id => {
+          if (!common.includes(user_id)) {
+            welcomeMessage(welcomeData, user_id);
+          }
+        });
+        common.forEach(common_id => {
+          welcomeMessage(welcomeData, common_id);
+        });
+        res.sendStatus(200);
+        break;
       }
+      case 'post': {
+        const common = recipients.target_channel_id.filter(common_id => recipients.target_user_id.includes(common_id));
+        recipients.target_channel_id.forEach(channel_id => {
+          if (!common.includes(channel_id)) {
+            welcomeMessage(welcomeData, channel_id);
+          }
+        });
+        recipients.target_user_id.forEach(user_id => {
+          if (!common.includes(user_id)) {
+            welcomeMessage(welcomeData, user_id);
+          }
+        });
+        common.forEach(common_id => {
+          welcomeMessage(welcomeData, common_id);
+        });
+        // if (recipients.target_user_id != recipients.target_channel_id){
+        //   welcomeMessage(welcomeData, recipients.target_user_id);
+        //   welcomeMessage(welcomeData, recipients.target_channel_id);
+        //   res.sendStatus(200);
+        //   break;
+        // } else {
+        //  welcomeMessage(welcomeData, recipients.target_channel_id);
+        // }
+        res.sendStatus(200);
+        break;
+      }
+      default: {
+        const common = recipients.target_channel_id.filter(common_id => recipients.target_user_id.includes(common_id));
+        recipients.target_channel_id.forEach(channel_id => {
+          if (!common.includes(channel_id)) {
+            helpMessage(helpData, channel_id);
+          }
+        });
+        recipients.target_user_id.forEach(user_id => {
+          if (!common.includes(user_id)) {
+            helpMessage(helpData, user_id);
+          }
+        });
+        common.forEach(common_id => {
+          helpMessage(helpData, common_id);
+        });
+        res.sendStatus(200);
+        // if (recipients.target_user_id != recipients.target_channel_id){
+        //   helpMessage(helpData, recipients.target_user_id);
+        //   helpMessage(helpData, recipients.target_channel_id);
+        //   res.sendStatus(200);
+        //   break;
+        // } else {
+        //   helpMessage(helpData, recipients.target_channel_id);
+        // }
+      }
+    }
   } else { res.sendStatus(503); }
 };
 
