@@ -19,16 +19,17 @@ const resources = async (req, res) => {
         res.sendStatus(200);
         break;
       case 'post':
-        let sendToUser = true;
+        const common = parsedCommand.target_channel_id.filter(common_id => parsedCommand.target_user_id.includes(common_id));
         parsedCommand.target_channel_id.forEach(channel_id => {
-          if (parsedCommand.target_user_id === channel_id) {
-            sendToUser = false;
+          if (!common.includes(channel_id)) {
+            helpMessage(helpData, channel_id);
           }
-          helpMessage(helpData, channel_id);
         })
-        if (sendToUser) {
-          helpMessage(helpData, parsedCommand.target_user_id);
-        }
+        parsedCommand.target_user_id.forEach(user_id => {
+          if (!common.includes(user_id)) {
+            helpMessage(helpData, user_id);
+          }
+        })
         res.sendStatus(200);
         break;
       default:
