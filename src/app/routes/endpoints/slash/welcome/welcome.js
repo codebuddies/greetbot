@@ -53,14 +53,6 @@ const welcome = async (req, res) => {
         common.forEach(common_id => {
           welcomeMessage(welcomeData, common_id);
         });
-        // if (recipients.target_user_id != recipients.target_channel_id){
-        //   welcomeMessage(welcomeData, recipients.target_user_id);
-        //   welcomeMessage(welcomeData, recipients.target_channel_id);
-        //   res.sendStatus(200);
-        //   break;
-        // } else {
-        //  welcomeMessage(welcomeData, recipients.target_channel_id);
-        // }
         res.sendStatus(200);
         break;
       }
@@ -80,14 +72,6 @@ const welcome = async (req, res) => {
           helpMessage(helpData, common_id);
         });
         res.sendStatus(200);
-        // if (recipients.target_user_id != recipients.target_channel_id){
-        //   helpMessage(helpData, recipients.target_user_id);
-        //   helpMessage(helpData, recipients.target_channel_id);
-        //   res.sendStatus(200);
-        //   break;
-        // } else {
-        //   helpMessage(helpData, recipients.target_channel_id);
-        // }
       }
     }
   } else { res.sendStatus(503); }
