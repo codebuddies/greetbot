@@ -30,6 +30,9 @@ const resources = async (req, res) => {
             helpMessage(helpData, user_id);
           }
         })
+        common.forEach(common_id => {
+          helpMessage(helpData, common_id);
+        })
         res.sendStatus(200);
         break;
       default:
