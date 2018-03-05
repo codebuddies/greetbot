@@ -27,7 +27,7 @@ const parsePayload = async (req) => {
   }
 
   if (target_user_id_array.length) {
-    target_user_id_array = target_user_id_array.map(await findDmChannel);
+    target_user_id_array = target_user_id_array.map(findDmChannel);
   }
 
   console.log(target_user_id_array);
