@@ -27,7 +27,7 @@ const parsePayload = async (req) => {
   }
 
   if (target_user_id_array.length) {
-    target_user_id_array = target_user_id_array.map(findDmChannel);
+    target_user_id_array = target_user_id_array.map(await findDmChannel);
   }
 
   console.log(target_user_id_array);
@@ -59,7 +59,7 @@ const parsePayload = async (req) => {
 
   //user_id of the user who typed the slash command
   //If no other info is specified, the Msg should go back to this user on the DM channel_id.
-  const default_user_id = req.body.user_id;
+  const default_user_id = await findDmChannel(req.body.user_id);
 
   //The DM channel id. Default if no target_channel_id is specified.
   //Msgs sent here will come from the bot_user as a DM.
@@ -109,7 +109,10 @@ const findDmChannel = async (userId) => {
   const dmRequest = {token: process.env.SLACK_TOKEN, user: userId };
   const params = qs.stringify(dmRequest);
   const sendDmRequest = axios.post('https://slack.com/api/im.open', params);
-  const req_id = sendDmRequest.then(result => { /*console.log(result.data.channel.id);*/ return result.data.channel.id; })
+  const req_id = sendDmRequest.then(result => {
+                  /*console.log(result.data.channel.id);*/
+                  return result.data.channel.id;
+                })
                .catch(error => console.log(error));
 
   return req_id;

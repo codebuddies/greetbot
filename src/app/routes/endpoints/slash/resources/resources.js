@@ -33,7 +33,7 @@ const resources = async (req, res) => {
         res.sendStatus(200);
         break;
       default:
-        helpMessage(helpData, parsedCommand.target_channel_id);
+        helpMessage(helpData, parsedCommand.target_channel_id[0]);
         res.sendStatus(200);
     }
   } else {
