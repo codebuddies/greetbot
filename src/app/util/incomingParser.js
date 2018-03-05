@@ -11,7 +11,7 @@ const parsePayload = async (req) => {
 
   //user_id of the @<user_name> typed with the slash command (if any).
   // Extract all user ids
-  let target_user_id_array;
+  let target_user_id_array = [];
   const userIdRegexp = /@(.*?)\|/g;
   // if (textPayload.indexOf("@") > -1) {
   //   target_user_id = textPayload.match(/@(.*?)\|/)[1]
