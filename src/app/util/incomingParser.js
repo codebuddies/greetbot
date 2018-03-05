@@ -65,17 +65,20 @@ const parsePayload = async (req) => {
   //Msgs sent here will come from the bot_user as a DM.
   const default_channel_id = req.body.channel_id;
 
-  if (!target_user_id_array.length) {
+  if (target_channel_id_array.length && target_user_id_array.length) {
+    return { target_user_id: target_user_id_array, target_channel_id: target_channel_id_array, action: action_request, payload: textPayload }
+  } else if (!target_channel_id_array.length && target_user_id_array.length) {
+    return { target_user_id: target_user_id_array, target_channel_id: target_user_id_array, action: action_request, payload: textPayload }
+  } else if (target_channel_id_array.length && !target_user_id_array.length) {
+    return { target_user_id: target_user_id_array, target_channel_id: target_channel_id_array, action: action_request, payload: textPayload }
+  } else {
     target_user_id_array.push(default_user_id);
-  }
-
-  if (!target_channel_id_array.length) {
-    target_channel_id_array.push(default_channel_id);
+    return { target_user_id: target_user_id_array, target_channel_id: target_user_id_array, action: action_request, payload: textPayload }
   }
 
   // const parsedList = { team_id, target_user_id, target_channel_id, action_request, default_user_id, default_channel_id }
 
-  return { target_user_id: target_user_id_array, target_channel_id: target_channel_id_array, action: action_request, payload: textPayload }
+  // return { target_user_id: target_user_id_array, target_channel_id: target_channel_id_array, action: action_request, payload: textPayload }
 
     // //If there isIn  a target user and channel, send both.
     // // channel=yes AND DM=yes....so two seperate messages.
