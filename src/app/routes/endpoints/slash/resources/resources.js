@@ -25,8 +25,8 @@ const resources = async (req, res) => {
           attachments = generateResourcesMessage(resourcesData.resources);
         } else {
           const filteredResources = resourcesData.resources.filter(resource => {
-            return parsedCommand.action_arguments.includes(resource.language.toLowerCase()) ||
-                    parsedCommand.action_arguments.includes(resource.level.toLowerCase());
+            return !(!parsedCommand.action_arguments.includes(resource.language.toLowerCase()) ||
+                    !parsedCommand.action_arguments.includes(resource.level.toLowerCase()));
           });
           title = `*Here are the topics for ${parsedCommand.action_arguments.join(" ")}*`;
           attachments = generateResourcesMessage(filteredResources);
