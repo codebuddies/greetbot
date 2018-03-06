@@ -18,16 +18,18 @@ const resources = async (req, res) => {
   if (req.body.token === process.env.SLACK_VERIFICATION_TOKEN) {
     switch (parsedCommand.action) {
       case 'list': {
+        let title;
+        let attachments;
         if (!parsedCommand.action_arguments.length) {
-          let title = "*Here is the full list of resources:*";
-          let attachments = generateResourcesMessage(resourcesData.resources);
+          title = "*Here is the full list of resources:*";
+          attachments = generateResourcesMessage(resourcesData.resources);
         } else {
           const filteredResources = resourcesData.resources.filter(resource => {
             return parsedCommand.action_arguments.includes(resource.language.toLowerCase()) ||
                     parsedCommand.action_arguments.includes(resource.level.toLowerCase());
           });
-          let title = `*Here are the topics for ${parsedCommand.action_arguments.join(" ")}*`;
-          let attachments = generateResourcesMessage(filteredResources);
+          title = `*Here are the topics for ${parsedCommand.action_arguments.join(" ")}*`;
+          attachments = generateResourcesMessage(filteredResources);
         }
         filterAndPostResults(parsedCommand.target_channel_id, parsedCommand.target_user_id, resourceMessage, resourcesTemplateMessage, title, attachments);
         res.sendStatus(200);
@@ -79,10 +81,10 @@ const helpMessage = (helpData, target_channel_id, title, attachments) => {
 const generateResourcesMessage = (resources) => {
   let attachments = [];
   resources.forEach(resource => {
-    const pretext = "resource['language-icon']  resource['language-desc']";
-    const title = "\nresource['level'] resource['language']\n\n";
-    const text = "resource['video-link']  resource['video-desc']\n\nresource['tutorial-link']  resource['tutorial-desc']\n\nresource['book-link']  resource['book-desc']\n\nresource['class-link']  resource['class-desc']\n\nresource['help_link']\n\nresource['more-questions']\n\n\nresource['maintainer']";
-    const color = "${sidebar-color}";
+    const pretext = `${resource['language-icon']}  ${resource['language-desc']}`;
+    const title = `\n${resource['level']} ${resource['language']}\n\n`;
+    const text = `${resource['video-link']}  ${resource['video-desc']}\n\n${resource['tutorial-link']}  ${resource['tutorial-desc']}\n\n${resource['book-link']}  ${resource['book-desc']}\n\n${resource['class-link']}  ${resource['class-desc']}\n\n${resource['help_link']}\n\n${resource['more-questions']}\n\n\n${resource['maintainer']}`;
+    const color = `${resource['sidebar-color']}`;
     attachments.push({pretext, title, text, color});
   });
   return attachments;
@@ -108,7 +110,7 @@ const filterAndPostResults = (channels, users, callback, data, title = '', attac
       callback(data, channel_id, title, attachments);
     }
   });
-  parsedCommand.target_user_id.forEach(user_id => {
+  users.forEach(user_id => {
     if (!common.includes(user_id)) {
       callback(data, user_id, title, attachments);
     }

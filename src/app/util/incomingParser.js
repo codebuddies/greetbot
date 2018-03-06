@@ -51,6 +51,9 @@ const parsePayload = async (req) => {
   if (action_keywords.length > 1) {
     action_keywords = [];
   }
+  if (action_arguments.length === 1 && action_arguments[0] === "") {
+    action_arguments = [];
+  }
 
   //user_id of the user who typed the slash command
   //If no other info is specified, the Msg should go back to this user on the DM channel_id.
