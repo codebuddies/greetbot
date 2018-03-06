@@ -37,7 +37,7 @@ const parsePayload = async (req) => {
   //If there's no legitimate command (or if it's blank), sent Msg should default to "help".
   // Removes any usernames or channels, and extracts keywords from the rest
   // const action_request = target_user_id_array.length || target_channel_id_array.length ? textPayload.substring(textPayload.indexOf(''),textPayload.indexOf("<")-1) : req.body.text;
-  const remaining_text = textPayload.replace(/<.*?>/g, '').replace(/ +/g, ' ').split(" ");
+  const remaining_text = textPayload.replace(/<.*?>/g, '').replace(/ +/g, ' ').toLowerCase().split(" ");
   let action_keywords = [];
   let action_arguments = [];
   remaining_text.forEach(word => {
