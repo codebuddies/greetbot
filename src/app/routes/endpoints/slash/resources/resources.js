@@ -37,26 +37,11 @@ const resources = async (req, res) => {
       }
       case 'post': {
         filterAndPostResults(parsedCommand.target_channel_id, parsedCommand.target_user_id, helpMessage, helpData);
-        // const common = parsedCommand.target_channel_id.filter(common_id => parsedCommand.target_user_id.includes(common_id));
-        // parsedCommand.target_channel_id.forEach(channel_id => {
-        //   if (!common.includes(channel_id)) {
-        //     helpMessage(helpData, channel_id);
-        //   }
-        // })
-        // parsedCommand.target_user_id.forEach(user_id => {
-        //   if (!common.includes(user_id)) {
-        //     helpMessage(helpData, user_id);
-        //   }
-        // })
-        // common.forEach(common_id => {
-        //   helpMessage(helpData, common_id);
-        // })
         res.sendStatus(200);
         break;
       }
       default: {
         filterAndPostResults(parsedCommand.target_channel_id, parsedCommand.target_user_id, helpMessage, helpData);
-        // helpMessage(helpData, parsedCommand.target_channel_id[0]);
         res.sendStatus(200);
       }
     }

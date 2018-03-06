@@ -21,56 +21,17 @@ const welcome = async (req, res) => {
   if (req.body.token === process.env.SLACK_VERIFICATION_TOKEN) {
     switch (recipients.action) {
       case 'test': {
-        const common = recipients.target_channel_id.filter(common_id => recipients.target_user_id.includes(common_id));
-        recipients.target_channel_id.forEach(channel_id => {
-          if (!common.includes(channel_id)) {
-            welcomeMessage(welcomeData, channel_id);
-          }
-        });
-        recipients.target_user_id.forEach(user_id => {
-          if (!common.includes(user_id)) {
-            welcomeMessage(welcomeData, user_id);
-          }
-        });
-        common.forEach(common_id => {
-          welcomeMessage(welcomeData, common_id);
-        });
+        filterAndPostResults(recipients.target_channel_id, recipients.target_user_id, welcomeMessage, welcomeData);
         res.sendStatus(200);
         break;
       }
       case 'post': {
-        const common = recipients.target_channel_id.filter(common_id => recipients.target_user_id.includes(common_id));
-        recipients.target_channel_id.forEach(channel_id => {
-          if (!common.includes(channel_id)) {
-            welcomeMessage(welcomeData, channel_id);
-          }
-        });
-        recipients.target_user_id.forEach(user_id => {
-          if (!common.includes(user_id)) {
-            welcomeMessage(welcomeData, user_id);
-          }
-        });
-        common.forEach(common_id => {
-          welcomeMessage(welcomeData, common_id);
-        });
+        filterAndPostResults(recipients.target_channel_id, recipients.target_user_id, welcomeMessage, welcomeData);
         res.sendStatus(200);
         break;
       }
       default: {
-        const common = recipients.target_channel_id.filter(common_id => recipients.target_user_id.includes(common_id));
-        recipients.target_channel_id.forEach(channel_id => {
-          if (!common.includes(channel_id)) {
-            helpMessage(helpData, channel_id);
-          }
-        });
-        recipients.target_user_id.forEach(user_id => {
-          if (!common.includes(user_id)) {
-            helpMessage(helpData, user_id);
-          }
-        });
-        common.forEach(common_id => {
-          helpMessage(helpData, common_id);
-        });
+        filterAndPostResults(recipients.target_channel_id, recipients.target_user_id, helpMessage, helpData);
         res.sendStatus(200);
       }
     }
@@ -79,18 +40,47 @@ const welcome = async (req, res) => {
 
 
 
-const welcomeMessage = ( welcomeData, target_channel_id ) => {
-   welcomeData.channel = target_channel_id;
-   const params = qs.stringify(welcomeData);
-   const sendMessage = axios.post('https://slack.com/api/chat.postMessage', params);
-   sendMessage.then(postResult);
- }
+const welcomeMessage = (welcomeData, target_channel_id, title, attachments) => {
+  if (title) {
+    welcomeData.text = title;
+  }
+  if (attachments) {
+    welcomeData.attachments = JSON.stringify(attachments);
+  }
+  welcomeData.channel = target_channel_id;
+  const params = qs.stringify(welcomeData);
+  const sendMessage = axios.post('https://slack.com/api/chat.postMessage', params);
+  sendMessage.then(postResult);
+}
 
- const helpMessage = (helpData, target_channel_id) => {
-   helpData.channel = target_channel_id;
-   const params = qs.stringify(helpData);
-   const sendMessage = axios.post('https://slack.com/api/chat.postMessage', params);
-   sendMessage.then(postResult);
- };
+const helpMessage = (helpData, target_channel_id, title, attachments) => {
+  if (title) {
+    helpData.text = title;
+  }
+  if (attachments) {
+    helpData.attachments = JSON.stringify(attachments);
+  }
+  helpData.channel = target_channel_id;
+  const params = qs.stringify(helpData);
+  const sendMessage = axios.post('https://slack.com/api/chat.postMessage', params);
+  sendMessage.then(postResult);
+};
+
+const filterAndPostResults = (channels, users, callback, data, title = '', attachments = '') => {
+  const common = channels.filter(common_id => users.includes(common_id));
+  channels.forEach(channel_id => {
+    if (!common.includes(channel_id)) {
+      callback(data, channel_id, title, attachments);
+    }
+  });
+  users.forEach(user_id => {
+    if (!common.includes(user_id)) {
+      callback(data, user_id, title, attachments);
+    }
+  });
+  common.forEach(common_id => {
+    callback(data, common_id, title, attachments);
+  });
+}
 
 module.exports = { welcome };
