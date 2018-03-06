@@ -7,3 +7,5 @@ package-lock.json
 .nvmrc
 .env.sample
 slush/*
+.config
+shrinkwrap.yaml
