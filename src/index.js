@@ -51,3 +51,5 @@ app.post('/interactive-message', (req, res) => { initalResponse.welcomeResponse(
 app.listen(process.env.PORT, () => {
   console.log(`App listening on port ${process.env.PORT}!`);
 });
+
+module.exports = app;
