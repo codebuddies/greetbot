@@ -1,10 +1,11 @@
-const chai = require('chai');
 const request = require('supertest');
-
+const chai = require('chai');
 const expect = chai.expect;
 
 describe('Greetbot routes testing', function() {
+
   describe('#GET /', function() {
+
     it('should load a basic page', function(done) {
       request(greetbot).get('/')
         .end(function(err, res) {
@@ -12,6 +13,7 @@ describe('Greetbot routes testing', function() {
           done();
         });
     });
+
     it('page should contain some basic intro text', function(done) {
       request(greetbot).get('/')
         .end(function(err, res) {
@@ -20,4 +22,5 @@ describe('Greetbot routes testing', function() {
         });
     });
   });
+
 });
