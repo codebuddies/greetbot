@@ -17,7 +17,6 @@ const parsePayload = async (req) => {
   let userMatch;
   userMatch = userIdRegexp.exec(textPayload);
   while (userMatch != null) {
-    console.log(userMatch[1]);
     target_user_id_array.push(await findDmChannel(userMatch[1]));
     userMatch = userIdRegexp.exec(textPayload);
   }
