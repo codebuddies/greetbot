@@ -41,6 +41,13 @@ describe('incomingParser', function() {
         });
       });
 
+      it('should pick up list keyword', async function() {
+        req.body.text = 'list';
+        await parsePayload(req).then(res => {
+          expect(res.action).to.equal('list');
+        });
+      });
+
       it('should return to default if more than one action keyword', async function() {
         req.body.text = 'list post';
         await parsePayload(req).then(res => {
@@ -94,6 +101,76 @@ describe('incomingParser', function() {
 
     })
 
+    describe('action_arguments', function() {
+
+      before(function setBody() {
+        req = {'body': {'command': '/welcome', 'user_id': user_id, 'token': slack_ver_token}};
+      });
+
+      it('should default to an empty object', async function() {
+        req.body.text = '';
+        await parsePayload(req).then(res => {
+          expect(res.action_arguments).to.eql({});
+        });
+      });
+
+      it('should return a language', async function() {
+        req.body.text = 'js';
+        await parsePayload(req).then(res => {
+          expect(res.action_arguments).to.eql({'language': ['javascript']});
+        });
+      });
+
+      it('should return multiple languages', async function() {
+        req.body.text = 'js python';
+        await parsePayload(req).then(res => {
+          expect(res.action_arguments).to.eql({'language': ['javascript', 'python']});
+        });
+      });
+
+      it('should return a level', async function() {
+        req.body.text = 'beg';
+        await parsePayload(req).then(res => {
+          expect(res.action_arguments).to.eql({'level': ['beginner']});
+        });
+      });
+
+      it('should return multiple levels', async function() {
+        req.body.text = 'int moar';
+        await parsePayload(req).then(res => {
+          expect(res.action_arguments).to.eql({'level': ['intermediate', 'advanced']});
+        });
+      });
+
+      it('should return a type', async function() {
+        req.body.text = 'book';
+        await parsePayload(req).then(res => {
+          expect(res.action_arguments).to.eql({'media-type': ['book']});
+        });
+      });
+
+      it('should return multiple types', async function() {
+        req.body.text = 'class website';
+        await parsePayload(req).then(res => {
+          expect(res.action_arguments).to.eql({'media-type': ['class', 'website']});
+        });
+      });
+
+      it('should deal with all of the above', async function() {
+        req.body.text = 'javascript beginner free book';
+        await parsePayload(req).then(res => {
+          expect(res.action_arguments).to.eql({'language': ['javascript'], 'level': ['beginner'], 'media-cost-desc': ['free'], 'media-type': ['book']});
+        });
+      });
+
+      it('should be case-insensitive', async function() {
+        req.body.text = 'SPAM';
+        await parsePayload(req).then(res => {
+          expect(res.action_arguments).to.eql({'language': ['python']});
+        });
+      });
+
+    });
 
   });
 });
