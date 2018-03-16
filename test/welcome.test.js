@@ -20,11 +20,5 @@ describe('#POST /welcome', function() {
         });
     });
 
-    it('should target the user_id', async function() {
-      await parsePayload(req).then(res => {
-        expect(res.target_channel_id[0]).to.equal(user_dm_id);
-      });
-    })
-
   });
 });
