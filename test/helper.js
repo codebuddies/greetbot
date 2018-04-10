@@ -1,21 +1,24 @@
 const greetbot = require('../src/index.js');
-const user_id = process.env.SLACK_USER_ID;
-const user_dm_id = process.env.SLACK_DM_ID;
-const user_dm_name = process.env.SLACK_DM_NAME;
-const other_user_id = process.env.SLACK_OTHER_USER_ID;
-const other_dm_id = process.env.SLACK_OTHER_DM_ID;
-const other_dm_name = process.env.SLACK_OTHER_DM_NAME;
-const general_id = process.env.SLACK_GENERAL_ID;
-const other_channel_id = process.env.SLACK_OTHER_CHANNEL_ID;
-const slack_ver_token = process.env.SLACK_VERIFICATION_TOKEN;
+
+const {
+  SLACK_USER_ID,
+  SLACK_DM_ID,
+  SLACK_DM_NAME,
+  SLACK_OTHER_USER_ID,
+  SLACK_OTHER_DM_ID,
+  SLACK_OTHER_DM_NAME,
+  SLACK_GENERAL_ID,
+  SLACK_OTHER_CHANNEL_ID,
+  SLACK_VERIFICATION_TOKEN,
+} = process.env;
 
 global.greetbot = greetbot;
-global.user_id = user_id;
-global.user_dm_id = user_dm_id;
-global.user_dm_name = user_dm_name;
-global.other_user_id = other_user_id;
-global.other_dm_id = other_dm_id;
-global.other_dm_name = other_dm_name;
-global.general_id = general_id;
-global.other_channel_id = other_channel_id;
-global.slack_ver_token = slack_ver_token;
+global.user_id = SLACK_USER_ID;
+global.user_dm_id = SLACK_DM_ID;
+global.user_dm_name = SLACK_DM_NAME;
+global.other_user_id = SLACK_OTHER_USER_ID;
+global.other_dm_id = SLACK_OTHER_DM_ID;
+global.other_dm_name = SLACK_OTHER_DM_NAME;
+global.general_id = SLACK_GENERAL_ID;
+global.other_channel_id = SLACK_OTHER_CHANNEL_ID;
+global.slack_ver_token = SLACK_VERIFICATION_TOKEN;
