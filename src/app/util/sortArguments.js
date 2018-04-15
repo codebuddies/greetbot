@@ -1,65 +1,65 @@
-const sortArguments = (req_arguments) => {
+const sortArguments = (reqArguments) => {
   let languages = [];
   let levels = [];
   let types = [];
   let costs = [];
-  req_arguments.forEach(argument => {
+  reqArguments.forEach(argument => {
     switch (argument.toLowerCase()) {
       // languages sort
       case 'javascript':
       case 'js': {
-        languages.push("javascript");
+        languages.push('javascript');
         break;
       }
       case 'python':
       case 'ni!':
       case 'spam': {
-        languages.push("python");
+        languages.push('python');
         break;
       }
       case 'ruby': {
-        languages.push("ruby");
+        languages.push('ruby');
         break;
       }
 
       // levels sort
       case 'beginner':
       case 'beg': {
-        levels.push("beginner");
+        levels.push('beginner');
         break;
       }
       case 'intermediate':
       case 'int':
       case 'inter': {
-        levels.push("intermediate");
+        levels.push('intermediate');
         break;
       }
       case 'advanced':
       case 'adv':
       case 'moar': {
-        levels.push("advanced");
+        levels.push('advanced');
         break;
       }
 
       // types sort
       case 'book': {
-        types.push("book");
+        types.push('book');
         break;
       }
       case 'tutorial': {
-        types.push("tutorial");
+        types.push('tutorial');
         break;
       }
       case 'class': {
-        types.push("class");
+        types.push('class');
         break;
       }
       case 'video': {
-        types.push("video");
+        types.push('video');
         break;
       }
       case 'website': {
-        types.push("website");
+        types.push('website');
         break;
       }
 
@@ -76,18 +76,18 @@ const sortArguments = (req_arguments) => {
   });
   let returnArgs = {};
   if (languages.length) {
-    returnArgs["language"] = languages;
+    returnArgs['language'] = languages;
   }
   if (levels.length) {
-    returnArgs["level"] = levels;
+    returnArgs['level'] = levels;
   }
   if (types.length) {
-    returnArgs["media-type"] = types;
+    returnArgs['media-type'] = types;
   }
   if (costs.length) {
-    returnArgs["media-cost-desc"] = costs;
+    returnArgs['media-cost-desc'] = costs;
   }
   return returnArgs;
 };
 
-module.exports = { sortArguments };
+module.exports = sortArguments;

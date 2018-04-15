@@ -67,7 +67,7 @@ const parsePayload = async (req) => {
   //
   // The DM channel id. Default if no target_channel_id is specified.
   // Msgs sent here will come from the bot_user as a DM.
-  const default_channel_id = req.body.channel_id;
+  // const default_channel_id = req.body.channel_id;
 
   // Return object
   // If both channel(s) and user(s) have been specified,
