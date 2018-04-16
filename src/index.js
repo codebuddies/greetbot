@@ -1,5 +1,5 @@
 require('dotenv').config();
-require('app-module-path').resolve(__dirname, '/app');
+require('app-module-path').addPath(`${__dirname}/app`);
 
 const app = require('express')();
 const bodyParser = require('body-parser');
