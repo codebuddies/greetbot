@@ -1,0 +1,20 @@
+{
+  "extends": ["standard"],
+  "plugins": [
+    "standard",
+    "promise"
+  ],
+  "rules": {
+    "semi": [2, "always"],
+    "spaced-comment": [2, "always", {
+      "line": {
+        "markers": ["*package", "!", ",", "="] },
+        "block": {
+          "balanced": true,
+          "markers": ["*package", "!", ","],
+          "exceptions": ["*"]
+        }
+      }
+    ]
+  }
+}
