@@ -35,11 +35,11 @@ const resources = async (req, res) => {
       case 'post': {
         let title;
         let attachments;
-        if (!(Object.keys(parsedCommand.action_arguments).length && parsedCommand.action_arguments.constructor === Object)) {
+        if (!(Object.keys(parsedCommand.actionArguments).length && parsedCommand.actionArguments.constructor === Object)) {
           title = "*Here is the full list of resources:*";
           attachments = genericResourcesAttachmentTemplate(resourcesData, messageBodies);
         } else {
-          const filteredResources = filterResources(resourcesData, parsedCommand.action_arguments);
+          const filteredResources = filterResources(resourcesData, parsedCommand.actionArguments);
           const filteredBodies = filterBodies(filteredResources, messageBodies);
           title = `*Here are the resources you requested:*`;
           attachments = genericResourcesAttachmentTemplate(filteredResources, filteredBodies);
