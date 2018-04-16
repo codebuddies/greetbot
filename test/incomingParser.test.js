@@ -1,6 +1,6 @@
-require('dotenv').config();
+// NOTE: This test suite tests the method parsePayload() in incomingParserJS.
 const expect = require('chai').expect;
-const parsePayload = require('../src/app/util/parsePayload');
+const parsePayload = require('../src/app/util/incomingParser').parsePayload;
 
 describe('parsePayload()', function () {
   // NOTE: This is a stubbed request

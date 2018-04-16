@@ -1,6 +1,8 @@
 // parsePayload is a utility class that takes in an input and returns a
 // sanitized object; helps with parsing out input arguments (parsePayload(arg))
 // and returns a standardized object.
+// Usage:
+// const parsePayload = require('/util/incomingParser').parsePayload;
 const axios = require('axios');
 const qs = require('querystring');
 // TODO: Change to absolute paths due to `require`
@@ -129,4 +131,4 @@ const findDmChannel = async (userId) => {
   return reqId;
 };
 
-module.exports = parsePayload;
+module.exports = { parsePayload };
