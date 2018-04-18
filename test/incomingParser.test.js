@@ -4,22 +4,25 @@ const parsePayload = require('../src/app/util/incomingParser').parsePayload;
 
 describe('parsePayload()', function () {
   // NOTE: This is a stubbed request
-  let req = {
-    'body': {
-      'command': '/welcome',
-      'text': 'test',
-      'user_id': '1A2B'
-    }
-  };
+
+  beforeEach(function() {
+    req = {
+      'body': {
+        'command': '/welcome',
+        'text': 'test',
+        'user_id': '1A2B',
+      }
+    };
+  })
 
   // TODO: Better to test if certain keywords are valid and if not,
   // it should return undefined.
-  describe.skip('when invoked with no arguments', function () {
+  describe('when invoked with no arguments', function () {
     it('should target the user_id', async function () {
       req.body.text = '';
       const res = await parsePayload(req);
       // TODO: res.target_channel_id should equal to req.user_id
-      expect(res.target_channel_id[0]).to.equal(global.user_dm_id);
+      expect(res.target_channel_id[0]).to.equal(req.body.user_id);
     });
   });
 
@@ -55,7 +58,7 @@ describe('parsePayload()', function () {
   });
 
   // TODO: returns undefined
-  describe.skip('when invoked with user', function () {
+  describe('when invoked with user', function () {
     it('should pick up users as an array', async function () {
       req.body.text = '<@1A2B|stain88>';
       const res = await parsePayload(req);

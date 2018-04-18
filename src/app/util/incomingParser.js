@@ -126,7 +126,7 @@ const findDmChannel = async (userId) => {
   const sendDmRequest = axios.post('https://slack.com/api/im.open', params);
   const reqId = sendDmRequest.then(result => {
     return result.data.channel.id;
-  }).catch(error => console.log(error));
+  }).catch(error => {return userId;});
 
   return reqId;
 };
