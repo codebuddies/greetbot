@@ -124,11 +124,11 @@ const findDmChannel = async (userId) => {
   const dmRequest = { token: process.env.SLACK_TOKEN, user: userId };
   const params = qs.stringify(dmRequest);
   const sendDmRequest = axios.post('https://slack.com/api/im.open', params);
-  const reqId = sendDmRequest.then(result => {
+  const reqId = await sendDmRequest.then(result => {
     return result.data.channel.id;
-  }).catch(error => {return userId;});
+  }).catch(error => {/*console.log(error);*/});
 
-  return reqId;
+  return reqId || userId;
 };
 
 module.exports = { parsePayload };
