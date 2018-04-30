@@ -15,9 +15,9 @@
 <body>
 	<div class="container">
 		<div class="jumbotron text-center">
-			<h1>Info about this resource</h1>
+			<h1>Info about this body template</h1>
 			<p class="lead">
-				<a class="btn btn-warning btn-lg" href="/templates/resources/">Back to resources list</a>
+				<a class="btn btn-warning btn-lg" href="/templates/bodies/">Back to body templates list</a>
 			</p>
 		</div>
 		<div class="row">
@@ -45,11 +45,11 @@
 		};
 
 		const generateFilePath = () => {
-			const language = document.getElementById('resourceLanguage').value;
-			const level = document.getElementById('resourceLevel').value;
-			const name = document.getElementById('resourceName').value;
+			const language = document.getElementById('bodyTemplateLanguage').value;
+			const level = document.getElementById('bodyTemplateLevel').value;
+			const name = document.getElementById('bodyTemplateName').value;
 			const path = `${language}/${level}/${name}.yml`;
-			document.getElementById('readResourcePath').innerHTML = path;
+			document.getElementById('readBodyTemplatePath').innerHTML = path;
 		}
 
 		const convert_to_link = (text) => {
@@ -65,14 +65,14 @@
 		const convert_emoji = (text) => {
 			let new_text = text;
 			Object.entries(emoji_map).forEach(([key, value]) => {
-				new_text = new_text.replace(key, value);
+				new_text = new_text.replace(new RegExp(key, 'g'), value);
 			});
 			return new_text;
 		}
 
 		const convert_text = (target) => {
 			const edit_field = target;
-			const read_field_id = edit_field.id.replace("resource", "readResource");
+			const read_field_id = edit_field.id.replace("body", "readBody");
 			const read_field = document.getElementById(read_field_id);
 			const current_text = edit_field.value;
 			let new_text = current_text;

@@ -8,24 +8,24 @@
 <body>
 	<div class="container">
 		<div class="jumbotron text-center">
-			<h1>List of current resources</h1>
+			<h1>List of current language bodies</h1>
 			<p class="lead">
 				<a class="btn btn-warning btn-lg" href="/templates/">Back to templates selector</a>
 			</p>
 		</div>
 
-		<% groupedResources.forEach(function(resourceLang) { %>
+		<% groupedResources.forEach(function(bodyLang) { %>
 			<div class="card-deck">
 				<div class="card mb-3">
-					<div class="card-header"><%= resourceLang.key %></div>
+					<div class="card-header"><%= bodyLang.key %></div>
 					<div class="card-body">
 						<div class="card-deck">
-							<% resourceLang.values.forEach(function(resourceLevel) { %>
+							<% bodyLang.values.forEach(function(bodyLevel) { %>
 								<div class="card mb-3" style="max-width: 20rem;">
-									<div class="card-header"><%= resourceLevel.key %></div>
+									<div class="card-header"><%= bodyLevel.key %></div>
 									<ul class="list-group list-group-flush">
-										<% resourceLevel.values.forEach(function(resource) { %>
-											<li class="list-group-item"><a href="/templates/resources/<%= resource.name %>"><%= resource.name %></a></li>
+										<% bodyLevel.values.forEach(function(bodyTemplate) { %>
+											<li class="list-group-item"><a href="/templates/bodies/<%= bodyTemplate.name %>"><%= bodyTemplate.name %></a></li>
 										<% }); %>
 									</ul>
 								</div>

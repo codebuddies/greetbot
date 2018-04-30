@@ -1,47 +1,47 @@
-<form method="POST" action="/resources/<%= resource.name %>">
+<form method="POST" action="/templates/bodies/<%= bodyTemplate.name %>">
 	<div class="form-group">
-		<label for="resourceNumber">Resource Number</label>
-		<input type="text" class="form-control edit-form" id="resourceNumber" name="resource[resource-number]" value="<%= resource ? resource["resource-number"] : '' %>" />
+		<label for="bodyTemplateName">File Name</label>
+		<input type="text" class="form-control edit-form" id="bodyTemplateName" name="bodyTemplate[name]" value="<%= bodyTemplate ? bodyTemplate["name"] : '' %>" />
 	</div>
 	<div class="form-group">
-		<label for="resourceLanguage">Language</label>
-		<input type="text" class="form-control edit-form" id="resourceLanguage" name="resource[language]" value="<%= resource ? resource["language"] : '' %>" />
+		<label for="bodyTemplateSidebarColor">Sidebar Color</label>
+		<input type="text" class="form-control edit-form" id="bodyTemplateSidebarColor" name="bodyTemplate[sidebar-color]" value="<%= bodyTemplate ? bodyTemplate["sidebar-color"] : '' %>" />
 	</div>
 	<div class="form-group">
-		<label for="resourceLevel">Level</label>
-		<input type="text" class="form-control edit-form" id="resourceLevel" name="resource[level]" value="<%= resource ? resource["level"] : '' %>" />
+		<label for="bodyTemplateLanguage">Language</label>
+		<input type="text" class="form-control edit-form" id="bodyTemplateLanguage" name="bodyTemplate[language]" value="<%= bodyTemplate ? bodyTemplate["language"] : '' %>" />
 	</div>
 	<div class="form-group">
-		<label for="resourceMediaCost">Media Cost</label>
-		<input type="text" class="form-control edit-form" id="resourceMediaCost" name="resource[media-cost]" value="<%= resource ? resource["media-cost"] : '' %>" />
+		<label for="bodyTemplateLevel">Level</label>
+		<input type="text" class="form-control edit-form" id="bodyTemplateLevel" name="bodyTemplate[level]" value="<%= bodyTemplate ? bodyTemplate["level"] : '' %>" />
 	</div>
 	<div class="form-group">
-		<label for="resourceMediaCostDesc">Media Cost Desc</label>
-		<input type="text" class="form-control edit-form" id="resourceMediaCostDesc" name="resource[media-cost-desc]" value="<%= resource ? resource["media-cost-desc"] : '' %>" />
+		<label for="bodyTemplateLevelIcon">Level Icon</label>
+		<input type="text" class="form-control edit-form" id="bodyTemplateLevelIcon" name="bodyTemplate[level-icon]" value="<%= bodyTemplate ? bodyTemplate["level-icon"] : '' %>" />
 	</div>
 	<div class="form-group">
-		<label for="resourceMediaType">Media Type</label>
-		<input type="text" class="form-control edit-form" id="resourceMediaType" name="resource[media-type]" value="<%= resource ? resource["media-type"] : '' %>" />
+		<label for="bodyTemplateLanguageIcon">Language Icon</label>
+		<input type="text" class="form-control edit-form" id="bodyTemplateLanguageIcon" name="bodyTemplate[language-icon]" value="<%= bodyTemplate ? bodyTemplate["language-icon"] : '' %>" />
 	</div>
 	<div class="form-group">
-		<label for="resourceMediaIcon">Media Icon</label>
-		<input type="text" class="form-control edit-form" id="resourceMediaIcon" name="resource[media-icon]" value="<%= resource ? resource["media-icon"] : '' %>" />
+		<label for="bodyTemplateLanguageDesc">Language Description</label>
+		<input type="text" class="form-control edit-form" id="bodyTemplateLanguageDesc" name="bodyTemplate[language-desc]" value="<%= bodyTemplate ? bodyTemplate["language-desc"] : '' %>" />
 	</div>
 	<div class="form-group">
-		<label for="resourceMediaLink">Media Link</label>
-		<input type="text" class="form-control edit-form" id="resourceMediaLink" name="resource[media-link]" value="<%= resource ? resource["media-link"] : '' %>" />
+		<label for="bodyTemplateLanguageBlurb">Language Blurb</label>
+		<input type="text" class="form-control edit-form" id="bodyTemplateLanguageBlurb" name="bodyTemplate[language-blurb]" value="<%= bodyTemplate ? bodyTemplate["language-blurb"] : '' %>" />
 	</div>
 	<div class="form-group">
-		<label for="resourceMediaDesc">Description</label>
-		<textarea type="text" class="form-control edit-form" id="resourceMediaDesc" name="resource[media-desc]" rows="8"><%= resource ? resource["media-desc"] : '' %></textarea>
+		<label for="bodyTemplateHelpLink">Help Link</label>
+		<input type="text" class="form-control edit-form" id="bodyTemplateHelpLink" name="bodyTemplate[help-link]" value="<%= bodyTemplate ? bodyTemplate["help-link"] : '' %>" />
 	</div>
 	<div class="form-group">
-		<label for="resourceCommunityRating">Community Rating</label>
-		<input type="text" class="form-control edit-form" id="resourceCommunityRating" name="resource[community-rating]" value="<%= resource ? resource["community-rating"] : '' %>" />
+		<label for="bodyTemplateMoreQuestion">More Questions</label>
+		<textarea type="text" class="form-control edit-form" id="bodyTemplateMoreQuestion" name="bodyTemplate[more-questions]" rows="8"><%= bodyTemplate ? bodyTemplate["more-questions"] : '' %></textarea>
 	</div>
 	<div class="form-group">
-		<label for="resourceName">File Name</label>
-		<input type="text" class="form-control edit-form" id="resourceName" name="resource[name]" value="<%= resource ? resource["name"] : '' %>" />
+		<label for="bodyTemplateMaintainer">Maintainer</label>
+		<input type="text" class="form-control edit-form" id="bodyTemplateMaintainer" name="bodyTemplate[maintainer]" value="<%= bodyTemplate ? bodyTemplate["maintainer"] : '' %>" />
 	</div>
 	<button type="submit" class="btn btn-primary">Submit changes</button>
 </form>

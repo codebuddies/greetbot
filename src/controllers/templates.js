@@ -34,12 +34,25 @@ const updateResource = (req, res) => {
 };
 
 const getAllBodies = (req, res) => {
-  const arrayOfBodies = Object.keys(bodiesData).map( (key) => {
-    return bodiesData[key];
-  });
+  const arrayOfBodies = arrayifyBodies(bodiesData);
   const groupedBodies = sortData(arrayOfBodies);
   res.render('templates/bodies/index', { title: 'Greetbot Language Bodies', groupedResources: groupedBodies });
 };
+
+const getBody = (req, res) => {
+  const arrayOfBodies = arrayifyBodies(bodiesData);
+  const bodyTemplate = arrayOfBodies.filter(bodyTemplate => {
+    return bodyTemplate.name === req.params.name;
+  })[0];
+  res.render('templates/bodies/show', { title: bodyTemplate.name, bodyTemplate: bodyTemplate })
+}
+
+const arrayifyBodies = (hashData) => {
+  const arrayified = Object.keys(hashData).map( (key) => {
+    return hashData[key];
+  });
+  return arrayified;
+}
 
 const sortData = (data) => {
   const dataByLang = groupByArray(data, 'language');
@@ -56,4 +69,5 @@ module.exports = {
   getResource,
   updateResource,
   getAllBodies,
+  getBody,
 };

@@ -45,6 +45,11 @@ router.route('/templates/bodies')
   // as an aid to creating Slack markdown formatting
   .get(templatesController.getAllBodies);
 
+// Assign all methods for /templates/bodies/:name route
+router.route('/templates/bodies/:name')
+  // Shows the current body fields
+  .get(templatesController.getBody)
+
 // Assign all methods for /resources route
 router.route('/resources')
   // The Slack endpoint command
