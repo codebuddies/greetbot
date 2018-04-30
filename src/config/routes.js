@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path');
 
 const resourcesController = require(path.join(__dirname, '..', 'controllers', 'resources'));
+const templatesController = require(path.join(__dirname, '..', 'controllers', 'templates'));
 const welcomeController = require(path.join(__dirname, '..', 'controllers', 'welcome'));
 const eventsController = require(path.join(__dirname, '..', 'controllers', 'events'));
 const interactiveController = require(path.join(__dirname, '..', 'controllers', 'interactive'));
@@ -19,6 +20,11 @@ const interactiveController = require(path.join(__dirname, '..', 'controllers', 
 //   - url_verification: Returns challenge token sent when present.
 //   - event_callback: Confirm verification token & handle `team_join` event.
 
+
+// Assign all methods for /templates route
+router.route('/templates')
+  // Landing page
+  .get(templatesController.getIndex);
 
 // Assign all methods for /resources route
 router.route('/resources')

@@ -23,9 +23,9 @@ describe('Greetbot routes testing', function () {
     });
   });
 
-  describe('#GET /resources', function() {
-    it('should load a resources index page', function (done) {
-      request(greetbot).get('/resources')
+  describe('#GET /templates', function() {
+    it('should load a templates index page', function (done) {
+      request(greetbot).get('/templates')
         .end(function (err, res) {
           if (err) { console.log(err); }
           expect(res.statusCode).to.equal(200);
@@ -34,7 +34,7 @@ describe('Greetbot routes testing', function () {
     });
 
     it('should contain some text', function (done) {
-      request(greetbot).get('/resources')
+      request(greetbot).get('/templates')
         .end(function (err, res) {
           if (err) { console.log(err); }
           expect(res.text.length).to.not.equal(0);
