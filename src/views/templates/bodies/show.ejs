@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.0/lumen/bootstrap.min.css" rel="stylesheet" integrity="sha384-3peic20OBS+kS9351sQOOO1LJYgA7iQkz8mjQQIGqCWy+rkEEOGIIIgQrVqL88+X" crossorigin="anonymous">
+
+	<style type="text/css">
+		#readResourceMediaDesc {
+			height: 300px;
+			max-height: 185px;
+			overflow-x: scroll;
+	 }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron text-center">
+			<h1>Info about this resource</h1>
+			<p class="lead">
+				<a class="btn btn-warning btn-lg" href="/templates/resources/">Back to resources list</a>
+			</p>
+		</div>
+		<div class="row">
+			<div class="col-sm">
+				<%- include partials/edit_form %>
+			</div>
+			<div class="col-sm">
+				<%- include partials/readonly_form %>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		/* jshint esversion: 6 */
+		const emoji_map = {
+			":heavy_plus:": "\u2795",
+			":cinema:": "\uD83C\uDFA6",
+			":books:": "\uD83D\uDCDA",
+			":link:": "\uD83D\uDD17",
+			":school_satchel:": "\uD83C\uDF92",
+			":star:": "\u2B50",
+			":white_check_mark:": "\u2705",
+			":question:": "\u2753",
+		};
+
+		const generateFilePath = () => {
+			const language = document.getElementById('resourceLanguage').value;
+			const level = document.getElementById('resourceLevel').value;
+			const name = document.getElementById('resourceName').value;
+			const path = `${language}/${level}/${name}.yml`;
+			document.getElementById('readResourcePath').innerHTML = path;
+		}
+
+		const convert_to_link = (text) => {
+			return text.replace(/<([^|]*?)\|(.*?)>/g, "<a href=\"$1\">$2</a>");
+		}
+
+		const convert_styles = (text) => {
+			return text.replace(/\*(.*?)\*/g, "<b>$1</b>")
+								.replace(/\_(.*?)\_/g, "<em>$1</em>")
+								.replace(/[\n\r]/g, "<br />");
+		}
+
+		const convert_emoji = (text) => {
+			let new_text = text;
+			Object.entries(emoji_map).forEach(([key, value]) => {
+				new_text = new_text.replace(key, value);
+			});
+			return new_text;
+		}
+
+		const convert_text = (target) => {
+			const edit_field = target;
+			const read_field_id = edit_field.id.replace("resource", "readResource");
+			const read_field = document.getElementById(read_field_id);
+			const current_text = edit_field.value;
+			let new_text = current_text;
+			new_text = convert_emoji(new_text);
+			new_text = convert_to_link(new_text);
+			new_text = convert_styles(new_text);
+			read_field.innerHTML = new_text;
+			generateFilePath();
+		}
+
+		const inputs = Array.from(document.querySelectorAll('.edit-form'));
+		inputs.forEach(input => {
+			convert_text(input);
+			generateFilePath();
+			input.addEventListener('keyup', evt => convert_text(evt.target))
+		});
+	</script>
+
+</body>
+</html>

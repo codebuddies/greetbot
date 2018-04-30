@@ -30,7 +30,7 @@ router.route('/templates')
 router.route('/templates/resources')
   // Used to display the current resources,
   // as an aid to creating Slack markdown formatting
-  .get(templatesController.getAllResources)
+  .get(templatesController.getAllResources);
 
 // Assign all methods for /templates/resources/:name route
 router.route('/templates/resources/:name')
@@ -38,6 +38,12 @@ router.route('/templates/resources/:name')
   .get(templatesController.getResource)
   // Saves any changes to the resource in development
   .post(templatesController.updateResource);
+
+// Assign all methods for /templates/bodies route
+router.route('/templates/bodies')
+  // Used to display the current language bodies,
+  // as an aid to creating Slack markdown formatting
+  .get(templatesController.getAllBodies);
 
 // Assign all methods for /resources route
 router.route('/resources')

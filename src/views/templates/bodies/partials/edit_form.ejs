@@ -1,0 +1,47 @@
+<form method="POST" action="/resources/<%= resource.name %>">
+	<div class="form-group">
+		<label for="resourceNumber">Resource Number</label>
+		<input type="text" class="form-control edit-form" id="resourceNumber" name="resource[resource-number]" value="<%= resource ? resource["resource-number"] : '' %>" />
+	</div>
+	<div class="form-group">
+		<label for="resourceLanguage">Language</label>
+		<input type="text" class="form-control edit-form" id="resourceLanguage" name="resource[language]" value="<%= resource ? resource["language"] : '' %>" />
+	</div>
+	<div class="form-group">
+		<label for="resourceLevel">Level</label>
+		<input type="text" class="form-control edit-form" id="resourceLevel" name="resource[level]" value="<%= resource ? resource["level"] : '' %>" />
+	</div>
+	<div class="form-group">
+		<label for="resourceMediaCost">Media Cost</label>
+		<input type="text" class="form-control edit-form" id="resourceMediaCost" name="resource[media-cost]" value="<%= resource ? resource["media-cost"] : '' %>" />
+	</div>
+	<div class="form-group">
+		<label for="resourceMediaCostDesc">Media Cost Desc</label>
+		<input type="text" class="form-control edit-form" id="resourceMediaCostDesc" name="resource[media-cost-desc]" value="<%= resource ? resource["media-cost-desc"] : '' %>" />
+	</div>
+	<div class="form-group">
+		<label for="resourceMediaType">Media Type</label>
+		<input type="text" class="form-control edit-form" id="resourceMediaType" name="resource[media-type]" value="<%= resource ? resource["media-type"] : '' %>" />
+	</div>
+	<div class="form-group">
+		<label for="resourceMediaIcon">Media Icon</label>
+		<input type="text" class="form-control edit-form" id="resourceMediaIcon" name="resource[media-icon]" value="<%= resource ? resource["media-icon"] : '' %>" />
+	</div>
+	<div class="form-group">
+		<label for="resourceMediaLink">Media Link</label>
+		<input type="text" class="form-control edit-form" id="resourceMediaLink" name="resource[media-link]" value="<%= resource ? resource["media-link"] : '' %>" />
+	</div>
+	<div class="form-group">
+		<label for="resourceMediaDesc">Description</label>
+		<textarea type="text" class="form-control edit-form" id="resourceMediaDesc" name="resource[media-desc]" rows="8"><%= resource ? resource["media-desc"] : '' %></textarea>
+	</div>
+	<div class="form-group">
+		<label for="resourceCommunityRating">Community Rating</label>
+		<input type="text" class="form-control edit-form" id="resourceCommunityRating" name="resource[community-rating]" value="<%= resource ? resource["community-rating"] : '' %>" />
+	</div>
+	<div class="form-group">
+		<label for="resourceName">File Name</label>
+		<input type="text" class="form-control edit-form" id="resourceName" name="resource[name]" value="<%= resource ? resource["name"] : '' %>" />
+	</div>
+	<button type="submit" class="btn btn-primary">Submit changes</button>
+</form>
