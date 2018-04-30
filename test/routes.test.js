@@ -43,9 +43,9 @@ describe('Greetbot routes testing', function () {
     });
   });
 
-  describe('#GET /resources/:name', function() {
-    it('should load a resources show page', function (done) {
-      request(greetbot).get('/resources/effectivejs')
+  describe('#GET /templates/resources/:name', function() {
+    it('should load a templates/resources show page', function (done) {
+      request(greetbot).get('/templates/resources/effectivejs')
         .end(function (err, res) {
           if (err) { console.log(err); }
           expect(res.statusCode).to.equal(200);
@@ -54,7 +54,7 @@ describe('Greetbot routes testing', function () {
     });
 
     it('should contain some text', function (done) {
-      request(greetbot).get('/resources/effectivejs')
+      request(greetbot).get('/templates/resources/effectivejs')
         .end(function (err, res) {
           if (err) { console.log(err); }
           expect(res.text.length).to.not.equal(0);

@@ -26,21 +26,23 @@ router.route('/templates')
   // Landing page
   .get(templatesController.getIndex);
 
-// Assign all methods for /resources route
-router.route('/resources')
+// Assign all methods for /templates/resources route
+router.route('/templates/resources')
   // Used to display the current resources,
   // as an aid to creating Slack markdown formatting
-  .get(resourcesController.getAll)
+  .get(templatesController.getAllResources)
+
+// Assign all methods for /templates/resources/:name route
+router.route('/templates/resources/:name')
+  // Shows the current route fields
+  .get(templatesController.getResource)
+  // Saves any changes to the resource in development
+  .post(templatesController.updateResource);
+
+// Assign all methods for /resources route
+router.route('/resources')
   // The Slack endpoint command
   .post(resourcesController.postResources);
-
-// Assign all methods for /resources/:name route
-router.route('/resources/:name')
-  // Shows the current route fields
-  .get(resourcesController.getResource)
-  // Saves any changes to the resource in development
-  .post(resourcesController.updateResource);
-
 
 // Assign all methods for /welcome route
 router.route('/welcome')

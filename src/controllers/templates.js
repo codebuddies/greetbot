@@ -4,30 +4,25 @@ const fs = require('fs');
 
 const resourceData = require(path.join('util', 'ymlLoader')).messageAttachments;
 const groupByArray = require(path.join('util', 'groupBy')).groupByArray;
-const slashResources = require(path.join('routes', 'endpoints', 'slash', 'resources', 'resources'));
 
 const getIndex = (req, res) => {
   res.render('templates/index', { title: 'Greetbot Templates' });
 };
 
-const getAll = (req, res) => {
+const getAllResources = (req, res) => {
   const resourcesByLang = groupByArray(resourceData, 'language');
   const groupedResources = resourcesByLang.map( (lang) => {
     lang.values = groupByArray(lang.values, 'level');
     return lang;
   });
-  res.render('resources/index', { title: 'Greetbot Resources', groupedResources: groupedResources });
-};
-
-const postResources = (req, res) => {
-  slashResources.resources(req, res);
+  res.render('templates/resources/index', { title: 'Greetbot Resources', groupedResources: groupedResources });
 };
 
 const getResource = (req, res) => {
   const resource = resourceData.filter(resource => {
     return resource.name === req.params.name;
   })[0];
-  res.render('resources/show', { title: resource.name, resource: resource });
+  res.render('templates/resources/show', { title: resource.name, resource: resource });
 };
 
 const updateResource = (req, res) => {
@@ -38,7 +33,7 @@ const updateResource = (req, res) => {
       console.log(err);
     }
   });
-  res.redirect('/resources');
+  res.redirect('/templates/resources');
 };
 
-module.exports = { getIndex, getAll, postResources, getResource, updateResource };
+module.exports = { getIndex, getAllResources, getResource, updateResource };
