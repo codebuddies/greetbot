@@ -29,11 +29,11 @@
 	</div>
 	<div class="form-group">
 		<label for="bodyTemplateLanguageBlurb">Language Blurb</label>
-		<input type="text" class="form-control edit-form" id="bodyTemplateLanguageBlurb" name="bodyTemplate[language-blurb]" value="<%= bodyTemplate ? bodyTemplate["language-blurb"] : '' %>" />
+		<textarea type="text" class="form-control edit-form" id="bodyTemplateLanguageBlurb" name="bodyTemplate[language-blurb]" rows="8"><%= bodyTemplate ? bodyTemplate["language-blurb"] : '' %></textarea>
 	</div>
 	<div class="form-group">
 		<label for="bodyTemplateHelpLink">Help Link</label>
-		<input type="text" class="form-control edit-form" id="bodyTemplateHelpLink" name="bodyTemplate[help_link]" value="<%= bodyTemplate ? bodyTemplate["help_link"] : '' %>" />
+		<textarea type="text" class="form-control edit-form" id="bodyTemplateHelpLink" name="bodyTemplate[help_link]" rows="8"><%= bodyTemplate ? bodyTemplate["help_link"] : '' %></textarea>
 	</div>
 	<div class="form-group">
 		<label for="bodyTemplateMoreQuestion">More Questions</label>
@@ -41,7 +41,7 @@
 	</div>
 	<div class="form-group">
 		<label for="bodyTemplateMaintainer">Maintainer</label>
-		<input type="text" class="form-control edit-form" id="bodyTemplateMaintainer" name="bodyTemplate[maintainer]" value="<%= bodyTemplate ? bodyTemplate["maintainer"] : '' %>" />
+		<textarea type="text" class="form-control edit-form" id="bodyTemplateMaintainer" name="bodyTemplate[maintainer]" rows="8"><%= bodyTemplate ? bodyTemplate["maintainer"] : '' %></textarea>
 	</div>
 	<button type="submit" class="btn btn-primary">Submit changes</button>
 </form>
