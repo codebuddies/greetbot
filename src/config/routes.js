@@ -49,6 +49,8 @@ router.route('/templates/bodies')
 router.route('/templates/bodies/:name')
   // Shows the current body fields
   .get(templatesController.getBody)
+  // Saves any changes to the message body in development
+  .post(templatesController.updateBody);
 
 // Assign all methods for /resources route
 router.route('/resources')

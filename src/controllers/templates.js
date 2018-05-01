@@ -45,7 +45,18 @@ const getBody = (req, res) => {
     return bodyTemplate.name === req.params.name;
   })[0];
   res.render('templates/bodies/show', { title: bodyTemplate.name, bodyTemplate: bodyTemplate })
-}
+};
+
+const updateBody = (req, res) => {
+  const bodyTemplate = req.body.bodyTemplate;
+  const ymltext = YAML.stringify(bodyTemplate, 2);
+  fs.writeFile(path.resolve(__dirname, '..', 'app', 'routes', 'data', 'slash', 'resources', 'messageBodies', bodyTemplate.language.toLowerCase(), `${bodyTemplate.name.toLowerCase()}.yml`), ymltext, (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+  res.redirect('/templates/bodies');
+};
 
 const arrayifyBodies = (hashData) => {
   const arrayified = Object.keys(hashData).map( (key) => {
@@ -70,4 +81,5 @@ module.exports = {
   updateResource,
   getAllBodies,
   getBody,
+  updateBody,
 };
