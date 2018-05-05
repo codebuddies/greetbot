@@ -1,3 +1,5 @@
+
+
 # greetbot
 greetbot is a Slack app built with [ExpressJS](https://expressjs.com/) to be used with the [Codebuddies](https://www.codebuddies.org) open Slack community. greetbot helps us welcome and onboard new members and provide valuable coding resources.
 
@@ -26,7 +28,7 @@ Development contribution requires that you have your own Slack workspace as your
 #### Installing greetbot in your sandbox workspace
 We have created a guide on how to set up your local version of greetbot in your Slack workspace. Read it [here](https://github.com/codebuddies/greetbot/wiki/Setup-Greetbot-in-your-Slack-Workspace).
 
-#### Putting it all together :tada: 
+#### Putting it all together :tada:
 Now that you have followed the tutorials and guides linked above to a T (right??), greetbot should work in your slack workspace. Try sending a slash command by typing `/welcome test`. greetbot should send you private message with a welcome message.
 
 ### Feature Requests / Ideas / Issues
