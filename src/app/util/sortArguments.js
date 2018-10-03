@@ -72,6 +72,10 @@ const sortArguments = (reqArguments) => {
         costs.push('paid');
         break;
       }
+
+      default: {
+        break;
+      }
     }
   });
   let returnArgs = {};
