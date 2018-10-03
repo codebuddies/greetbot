@@ -103,6 +103,13 @@ describe('parsePayload()', function () {
 
       expect(res.actionArguments).to.eql({ 'language': ['python'] });
     });
+
+    it('should return nothing', async function () {
+      req.body.text = 'cats are awesome';
+      const res = await parsePayload(req);
+
+      expect(res.actionArguments).to.be.empty;
+    });
   });
 
   describe('when invoked with level as arguments', function () {
