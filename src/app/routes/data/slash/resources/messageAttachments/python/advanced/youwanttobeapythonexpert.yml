@@ -1,0 +1,10 @@
+resource-number: 5
+language: 'python'
+level: 'advanced'
+media-cost: $0
+media-cost-desc: "FREE"
+media-type: "video"
+media-icon: ":cinema:"
+media-link: "<https://www.youtube.com/watch?v=cKPlPJyQrt4|So you want to be a Python expert - James Powell>"
+media-desc: "*James Powell* takes a deep dive into some of the concepts and language features that will help you to write truly idiomatic python code"
+community-rating: ":heavy_plus:"
